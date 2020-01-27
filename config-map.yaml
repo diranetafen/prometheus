@@ -79,7 +79,6 @@ data:
        - job_name: 'kube-state-metrics'
          static_configs:
            - targets: ['10.32.0.2:8080']
-		
         - job_name: 'blackbox'
           metrics_path: /probe
           params:
