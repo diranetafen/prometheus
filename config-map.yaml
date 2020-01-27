@@ -29,47 +29,35 @@ data:
         static_configs:
         - targets:
           - "10.1.150.150:32000"
-
     scrape_configs:
-
        - job_name: 'prometheus'
          static_configs:
             - targets: ['10.1.150.150:30000']
-
        - job_name: 'jenkins'
          metrics_path: /prometheus
          static_configs:
            - targets: ['10.1.150.4:8085']
-
        - job_name: node-exporter
          static_configs:
            - targets: ['10.1.150.126:31020']
-
        - job_name: 'kubernetes-apiservers'
          kubernetes_sd_configs:
          - role: endpoints
          scheme: https
-
          tls_config:
            ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
          bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-
          relabel_configs:
          - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
            action: keep
            regex: default;kubernetes;https
-
        - job_name: 'kubernetes-cadvisor'
-
          scheme: https
-
          tls_config:
            ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
          bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
-
          kubernetes_sd_configs:
          - role: node
-
          relabel_configs:
          - action: labelmap
            regex: __meta_kubernetes_node_label_(.+)
@@ -79,24 +67,20 @@ data:
            regex: (.+)
            target_label: __metrics_path__
            replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
-
        - job_name: 'azure-monitoring'
          static_configs:
            - targets: ['10.1.150.126:9276']
-
        - job_name: 'cadvisor'
          static_configs:
             - targets: ['10.1.150.126:9090']
-
        - job_name: 'eks-monitoring'
          static_configs:
            - targets: ['10.1.150.126:9016']
-
        - job_name: 'kube-state-metrics'
          static_configs:
            - targets: ['10.32.0.2:8080']
-		   
-	- job_name: 'blackbox'
+		
+        - job_name: 'blackbox'
           metrics_path: /probe
           params:
            module: [http_2xx]  # Look for a HTTP 200 response.
