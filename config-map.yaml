@@ -93,7 +93,7 @@ data:
              target_label: instance
            - target_label: __address__
              replacement: 10.104.74.117:9115  # The blackbox exporter's real hostname:port.
-       - job_name: 'mysqld'
+      
+      - job_name: 'mysqld'
          static_configs: 
-         - targets: ['10.96.141.144:9104']
-		  
+         - targets: ['10.96.141.144:9104']	  
