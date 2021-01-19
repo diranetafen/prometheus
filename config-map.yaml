@@ -28,7 +28,7 @@ data:
       - scheme: http
         static_configs:
         - targets:
-          - "10.1.150.150:32000"
+          - "alertmanager.monitoring.svc:8080"
     scrape_configs:
       - job_name: 'prometheus'
         static_configs:
@@ -39,7 +39,7 @@ data:
           - targets: ['10.1.150.4:8085']
       - job_name: node-exporter
         static_configs:
-          - targets: ['10.1.150.126:31020']
+          - targets: ['172.17.0.54:31020']
       - job_name: 'kubernetes-apiservers'
         kubernetes_sd_configs:
         - role: endpoints
@@ -69,13 +69,13 @@ data:
           replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
       - job_name: 'azure-monitoring'
         static_configs:
-          - targets: ['10.1.150.126:9276']
+          - targets: ['172.17.0.54:9276']
       - job_name: 'cadvisor'
         static_configs:
-          - targets: ['10.1.150.126:9090']
+          - targets: ['172.17.0.54:9090']
       - job_name: 'eks-monitoring'
         static_configs:
-          - targets: ['10.1.150.126:9016']
+          - targets: ['172.17.0.54:9016']
       - job_name: 'kube-state-metrics'
         static_configs:
           - targets: ['10.32.0.2:8080']
@@ -85,7 +85,7 @@ data:
           module: [http_2xx]  # Look for a HTTP 200 response.
         static_configs:
           - targets:
-             - http://10.1.150.126:31000/   # Target to probe (webpress application url) with http.
+             - http://172.17.0.54:31000/   # Target to probe (webpress application url) with http.
         relabel_configs:
           - source_labels: [__address__]
             target_label: __param_target
