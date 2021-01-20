@@ -32,7 +32,7 @@ data:
     scrape_configs:
       - job_name: 'prometheus'
         static_configs:
-          - targets: ['172.17.0.44:30000']
+          - targets: ['10.1.150.126:30000']
       - job_name: 'jenkins'
         metrics_path: /prometheus
         static_configs:
@@ -69,13 +69,13 @@ data:
           replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
       - job_name: 'azure-monitoring'
         static_configs:
-          - targets: ['172.17.0.54:9276']
+          - targets: ['10.1.150.150:9276']
       - job_name: 'cadvisor'
         static_configs:
-          - targets: ['172.17.0.54:9090']
+          - targets: ['10.1.150.150:9090']
       - job_name: 'eks-monitoring'
         static_configs:
-          - targets: ['172.17.0.54:9016']
+          - targets: ['10.1.150.150:9016']
       - job_name: 'kube-state-metrics'
         static_configs:
           - targets: ['kube-state-metrics.kube-system.svc:8080']
@@ -85,7 +85,7 @@ data:
           module: [http_2xx]  # Look for a HTTP 200 response.
         static_configs:
           - targets:
-             - http://172.17.0.54:31000/   # Target to probe (webpress application url) with http.
+             - http://10.1.150.150:31000/   # Target to probe (webpress application url) with http.
         relabel_configs:
           - source_labels: [__address__]
             target_label: __param_target
